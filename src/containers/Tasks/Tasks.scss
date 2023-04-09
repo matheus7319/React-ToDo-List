@@ -1,0 +1,16 @@
+#listTasks {
+  background: rgba($color: #FFFFFF, $alpha: 0.7);
+  @apply rounded-md;
+
+  .task-item {
+    @apply mt-2;
+  }
+
+  li {
+    &:first-child {
+      .task-item {
+        @apply mt-0;
+      }
+    }
+  }
+}

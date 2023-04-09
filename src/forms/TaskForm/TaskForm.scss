@@ -1,0 +1,27 @@
+.control-group {
+  position: relative;
+
+  .control-icon {
+    position: absolute;
+    margin-top: 2px;
+
+    @apply flex items-center justify-center p-2;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  input {
+    @apply py-2 px-3 w-full rounded-md;
+  }
+
+  &.control-group-icon {
+
+    input,
+    textarea {
+      @apply pl-9;
+    }
+  }
+}

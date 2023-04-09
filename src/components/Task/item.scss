@@ -1,0 +1,50 @@
+.task-item {
+  background: rgba(255, 255, 255, 0.6);
+  @apply p-4 rounded-md;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .task-item-header {
+    @apply flex items-center justify-between;
+
+    .task-item-header-start,
+    .task-item-header-end {
+      @apply flex items-center;
+    }
+
+    .task-id {
+      @apply font-bold font-mono text-base m-1;
+    }
+
+    .task-title {
+      @apply font-bold font-mono text-base m-1;
+    }
+  }
+
+  .task-timer {
+    @apply m-1 px-3 py-2 bg-slate-400 rounded-full text-white;
+  }
+
+  .task-play {
+    @apply w-10 h-10 bg-green-500 flex items-center justify-center rounded-full text-white;
+  }
+
+  .task-delete {
+    @apply w-10 h-10 bg-red-500 flex items-center justify-center rounded-full text-white;
+  }
+
+  .task-description {
+    @apply flex p-2 mt-2 bg-slate-200 border-2 rounded-md text-sm;
+  }
+}
+
+.task-timer {
+  @apply flex items-center;
+
+  .task-timer-icon {
+    @apply flex items-center justify-center mr-1;
+  }
+}
