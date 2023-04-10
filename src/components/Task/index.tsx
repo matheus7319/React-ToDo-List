@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { TaskItem } from '../../models/task.model';
+import Countdown from '../Countdown'
+import moment from 'moment';
 import './item.scss';
 
 interface Props {
@@ -11,10 +13,12 @@ interface Props {
 function Task(props: Props) {
   const { data, index } = props;
   const { title, timer, description } = data;
-  
-  const [playButton, setPlayButton] = useState({
-    paused: true,
-  });
+
+  const [hour] = useState<number>(moment(timer, 'hh:mm:ss').get('hour'));
+  const [minute] = useState<number>(moment(timer, 'hh:mm:ss').get('minute'));
+  const [second] = useState<number>(moment(timer, 'hh:mm:ss').get('second'));
+
+  const COUNTDOWN_MS = moment(moment()).add(hour, 'h').add(minute, 'm').add(second, 's').toDate().getTime();
 
   const removeTask = (index: number | undefined) => {
     if (index == null || index == undefined) {
@@ -30,19 +34,6 @@ function Task(props: Props) {
     props.onRemoveTask(myTasks);
   }
 
-  const playTask = () => {
-    if (playButton.paused) {
-
-    } else {
-
-    }
-
-    setPlayButton(prev => ({
-      ...prev,
-      paused: !playButton.paused
-    }))
-  }
-
   return (
     <div className="task-item">
       <div className='task-item-header'>
@@ -53,25 +44,14 @@ function Task(props: Props) {
         <div className='task-item-header-end'>
           {timer && (
             <>
-              <button className="task-play" onClick={playTask}>
-                {playButton.paused && (
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-                  </svg>
-                )}
-                {!playButton.paused && (
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
-                  </svg>
-                )}
-              </button>
               <div className='task-timer'>
                 <i className='task-timer-icon'>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </i>
-                <p className='task-timer-label'>{timer}</p>
+                {/* <Countdown targetDate={COUNTDOWN_MS} /> */}
+                <p>{timer}</p>
               </div>
             </>
           )}
